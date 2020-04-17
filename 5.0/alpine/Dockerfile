@@ -3,7 +3,7 @@ FROM endial/alpine:v3.6
 LABEL \
 	"Version"="v5.0" \
 	"Description"="Docker for PHP-FPM 5.0 based on Alpine 3.11." \
-	"Dockerfile"="https://github.com/endial/docker-libs" \
+	"Dockerfile"="https://github.com/endial/docker-nginx" \
 	"Vendor"="Endial Fang (endial@126.com)"
 
 RUN  apk update \
