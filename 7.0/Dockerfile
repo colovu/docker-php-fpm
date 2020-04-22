@@ -1,7 +1,7 @@
 FROM endial/ubuntu:18.04
 
-ENV APP_MAJOR       7.2 \
-	APP_VERSION		7.2.24-0ubuntu0.18.04.4
+ENV APP_MAJOR=7.2 \
+	APP_VERSION=7.2.24-0ubuntu0.18.04.4
 
 LABEL \
 	"Version"="v7.2" \
