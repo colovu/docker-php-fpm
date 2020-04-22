@@ -7,8 +7,8 @@
 
 ## 基本信息
 
-* 镜像地址：endial/php:v7.2
-  * 依赖镜像：endial/ubuntu:v18.04
+* 镜像地址：endial/php:7.2
+  * 依赖镜像：endial/ubuntu:18.04
 
 
 
@@ -52,7 +52,7 @@
  docker run -d --name php-fpm \
   -v /host/dir/to/www:/srv/www:ro \
   -v /host/dir/to/conf:/srv/conf \
-  endial/php:v7.2
+  endial/php:7.2
 ```
 
 如果存在 dvc（endial/dvc-alpine） 数据卷容器：
@@ -60,7 +60,7 @@
 ```shell
 docker run -d --name php-fpm \
   --volumes-from dvc \
-  endial/php:v7.2
+  endial/php:7.2
 ```
 
 
