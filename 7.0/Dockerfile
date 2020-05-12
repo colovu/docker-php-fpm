@@ -1,4 +1,4 @@
-FROM endial/ubuntu:18.04
+FROM colovu/ubuntu:18.04
 
 ENV APP_MAJOR=7.2 \
 	APP_VERSION=7.2.24-0ubuntu0.18.04.4
@@ -6,24 +6,24 @@ ENV APP_MAJOR=7.2 \
 LABEL \
 	"Version"="v7.2" \
 	"Description"="Docker image for php 7.2 with php-fpm based on Ubuntu 18.04." \
-	"Dockerfile"="https://github.com/endial/docker-php" \
+	"Dockerfile"="https://github.com/colovu/docker-php" \
 	"Vendor"="Endial Fang (endial@126.com)"
 
 RUN set -eux; \
+# 设置程序使用静默安装，而非交互模式；类似tzdata等程序需要使用静默安装
+	export DEBIAN_FRONTEND=noninteractive; \
+	\
 	groupadd -r php; \
 	useradd -r -g php -s /usr/sbin/nologin -d /usr/cache/php7 php; \
 	\
 	mkdir -p /etc/php7 /srv/conf/php7 /var/log/php7 /var/run/php7 /var/cache/php7; \
 	\
-# 设置程序使用静默安装，而非交互模式；类似tzdata等程序需要使用静默安装
-	export DEBIAN_FRONTEND=noninteractive; \
-	\
 # 更新源，并安装临时使用的软件包（使用完后可删除）
 	fetchDeps=" \
-# 下载工具
 		ca-certificates \
 		wget \
 	"; \
+	savedAptMark="$(apt-mark showmanual)"; \
 	apt update; \
 	apt install -y --no-install-recommends ${fetchDeps}; \
 	\
@@ -49,8 +49,18 @@ RUN set -eux; \
 	\
 # 设置临时目录的权限信息，设置为777是为了保证后续使用`--user`或`gosu`时，可以更改目录对应的用户属性信息
 	chown -Rf php:php /etc/php7 /srv/conf/php7 /var/log/php7 /var/run/php7 /var/cache/php7; \
-# this 777 will be replaced by 700 or 755 at runtime (allows semi-arbitrary "--user" values)
 	chmod 777 /etc/php7 /srv/conf/php7 /var/log/php7 /var/run/php7 /var/cache/php7; \
+	\
+# 查找新安装的应用相应的依赖软件包，并表示为'manual'，防止后续自动清理时被删除
+	apt-mark auto '.*' > /dev/null; \
+	{ [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; }; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { print $(NF-1) }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| cut -d: -f1 \
+		| sort -u \
+		| xargs -r apt-mark manual; \
 	\
 # 删除临时软件包，清理缓存
 	apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false ${fetchDeps}; \

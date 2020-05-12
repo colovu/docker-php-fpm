@@ -1,14 +1,15 @@
 # PHP-FPM
 
-针对PHP 应用的 Docker 镜像，用于提供 PHP解析及PHP-FPM 服务。
+针对 PHP-FPM 应用的 Docker 镜像，用于提供 PHP解析及PHP-FPM 服务。
 
+**版本信息：**
 
+- 7、7.2、latest
 
+**镜像信息：**
 
-## 基本信息
-
-* 镜像地址：endial/php:7.2
-  * 依赖镜像：endial/ubuntu:18.04
+* 镜像地址：colovu/php:latest
+  * 依赖镜像：colovu/ubuntu:latest
 
 
 
@@ -52,15 +53,15 @@
  docker run -d --name php-fpm \
   -v /host/dir/to/www:/srv/www:ro \
   -v /host/dir/to/conf:/srv/conf \
-  endial/php:7.2
+  colovu/php:latest
 ```
 
-如果存在 dvc（endial/dvc-alpine） 数据卷容器：
+如果存在 dvc（colovu/dvc-alpine） 数据卷容器：
 
 ```shell
 docker run -d --name php-fpm \
   --volumes-from dvc \
-  endial/php:7.2
+  colovu/php:latest
 ```
 
 
@@ -94,4 +95,4 @@ docker stop php-fpm
 
 ----
 
-本文原始来源 [Endial Fang](https://github.com/endial) @ [Github.com](https://github.com)
+本文原始来源 [Endial Fang](https://github.com/colovu) @ [Github.com](https://github.com)
