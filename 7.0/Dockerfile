@@ -21,15 +21,15 @@ RUN set -eux; \
 # 更新源，并安装临时使用的软件包（使用完后可删除）
 	fetchDeps=" \
 		ca-certificates \
-		wget \
+		curl \
 	"; \
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt update; \
 	apt install -y --no-install-recommends ${fetchDeps}; \
 	\
-# 安装应用程序及需要依赖的软件包
-	apt install -y \
-		curl openssl \
+# 软件包及依赖
+	appDeps=" \
+		openssl \
 		php7.2 \
 		php7.2-bcmath php7.2-bz2 php7.2-curl \
 		php7.2-dba php7.2-fpm php7.2-gd php7.2-gmp \
@@ -39,13 +39,15 @@ RUN set -eux; \
 		php7.2-soap php7.2-sqlite3 php7.2-sybase \
 		php7.2-tidy php7.2-xml php7.2-xmlrpc php7.2-xsl php7.2-zip \
 # php7.2-cgi php7.2-cli php7.2-imap php7.2-snmp
-	; \
+	"; \
+	\
+# 安装应用程序及需要依赖的软件包
+	apt install -y ${appDeps}; \
+	savedAptMark="${savedAptMark} ${appDeps}"; \
 	\
 # 为中国区使用重新配置tzdata信息
 	ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
 	dpkg-reconfigure -f noninteractive tzdata; \
-	\
-	sed -ri 's/^(listen) .*$/\1 = 9000/' /etc/php/7.2/fpm/pool.d/www.conf; \
 	\
 # 设置临时目录的权限信息，设置为777是为了保证后续使用`--user`或`gosu`时，可以更改目录对应的用户属性信息
 	chown -Rf php:php /etc/php7 /srv/conf/php7 /var/log/php7 /var/run/php7 /var/cache/php7; \
