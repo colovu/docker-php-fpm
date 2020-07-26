@@ -1,4 +1,6 @@
-FROM colovu/ubuntu:18.04
+FROM colovu/debian:10
+
+ARG app_ver=7.2
 
 ENV APP_MAJOR=7.2 \
 	APP_VERSION=7.2.24-0ubuntu0.18.04.4
@@ -44,10 +46,6 @@ RUN set -eux; \
 # 安装应用程序及需要依赖的软件包
 	apt install -y ${appDeps}; \
 	savedAptMark="${savedAptMark} ${appDeps}"; \
-	\
-# 为中国区使用重新配置tzdata信息
-	ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
-	dpkg-reconfigure -f noninteractive tzdata; \
 	\
 # 设置临时目录的权限信息，设置为777是为了保证后续使用`--user`或`gosu`时，可以更改目录对应的用户属性信息
 	chown -Rf php:php /etc/php7 /srv/conf/php7 /var/log/php7 /var/run/php7 /var/cache/php7; \
