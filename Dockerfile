@@ -8,7 +8,7 @@ FROM colovu/debian:10
 ARG apt_source=default
 
 # 外部指定应用版本信息，如 "--build-arg app_ver=6.0.0"
-ARG app_ver=5.6
+ARG app_ver=7.4
 
 # 编译镜像时指定本地服务器地址，如 "--build-arg local_url=http://172.29.14.108/dist-files/"
 ARG local_url=""
@@ -62,11 +62,11 @@ RUN \
 		openssl \
 		php${APP_VERSION} \
 		php${APP_VERSION}-bcmath php${APP_VERSION}-bz2 php${APP_VERSION}-cgi php${APP_VERSION}-cli \
-		php${APP_VERSION}-common php${APP_VERSION}-curl php${APP_VERSION}-dba php${APP_VERSION}-enchant php${APP_VERSION}-fpm \
-		php${APP_VERSION}-gd php${APP_VERSION}-gmp php${APP_VERSION}-imap php${APP_VERSION}-interbase \
-		php${APP_VERSION}-intl php${APP_VERSION}-json php${APP_VERSION}-ldap php${APP_VERSION}-mbstring php${APP_VERSION}-mcrypt \
-		php${APP_VERSION}-mysql php${APP_VERSION}-odbc php${APP_VERSION}-opcache php${APP_VERSION}-pgsql \
-		php${APP_VERSION}-phpdbg php${APP_VERSION}-pspell php${APP_VERSION}-readline php${APP_VERSION}-recode \
+		php${APP_VERSION}-common php${APP_VERSION}-curl php${APP_VERSION}-dba php${APP_VERSION}-enchant \
+		php${APP_VERSION}-fpm php${APP_VERSION}-gd php${APP_VERSION}-gmp php${APP_VERSION}-imap \
+		php${APP_VERSION}-interbase php${APP_VERSION}-intl php${APP_VERSION}-json php${APP_VERSION}-ldap \
+		php${APP_VERSION}-mbstring php${APP_VERSION}-mysql php${APP_VERSION}-odbc php${APP_VERSION}-opcache \
+		php${APP_VERSION}-pgsql php${APP_VERSION}-phpdbg php${APP_VERSION}-pspell php${APP_VERSION}-readline \
 		php${APP_VERSION}-snmp php${APP_VERSION}-soap php${APP_VERSION}-sqlite3 php${APP_VERSION}-sybase \
 		php${APP_VERSION}-tidy php${APP_VERSION}-xml php${APP_VERSION}-xmlrpc php${APP_VERSION}-xsl php${APP_VERSION}-zip \
 	"; \
