@@ -29,6 +29,7 @@ export ENV_DEBUG=${ENV_DEBUG:-false}
 # Paths
 
 # Application settings
+export PHP_FPM_PORT=${PHP_FPM_PORT:-9000}
 
 # Application Cluster configuration
 
