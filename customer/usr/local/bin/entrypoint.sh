@@ -88,9 +88,6 @@ _main() {
 			exec gosu "${APP_NAME}" "$0" "$@"
 		fi
 		
-		# 执行应用预初始化操作
-		docker_custom_preinit
-
 		# 执行应用初始化操作
 		docker_app_init
 		

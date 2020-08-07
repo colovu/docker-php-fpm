@@ -7,4 +7,5 @@ services:
     image: 'colovu/php-fpm:latest'
     volumes:
       - '/tmp/conf:/srv/conf'
+      - '/tmp/data:/srv/data'
 

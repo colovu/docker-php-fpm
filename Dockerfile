@@ -85,17 +85,17 @@ RUN \
 		gnupg \
 		dirmngr \
 	"; \
-	apt-get update; \
-	apt-get upgrade -y; \
-	apt-get install -y --no-install-recommends ${fetchDeps}; \
+	apt update; \
+	apt upgrade -y; \
+	apt install -y --no-install-recommends ${fetchDeps}; \
 	\
 
 # 包管理方式安装: 增加软件包特有源，并使用系统包管理方式安装软件; 安装后需要确认 ${APP_DEF_DIR} 目录中存在原始配置文件
 	wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -; \
 	echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list; \
-	apt-get update; \
-	apt-get upgrade -y; \
-	apt-get install -y ${appDeps}; \
+	apt update; \
+	apt upgrade -y; \
+	apt install -y ${appDeps}; \
 	\
 	\
 	\
@@ -114,8 +114,8 @@ RUN \
 		| xargs -r apt-mark manual; \
 	\
 # 删除安装的临时依赖软件包，清理缓存
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false ${fetchDeps}; \
-	apt-get autoclean -y; \
+	apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false ${fetchDeps}; \
+	apt autoclean -y; \
 	rm -rf /var/lib/apt/lists/*; \
 	:;
 
