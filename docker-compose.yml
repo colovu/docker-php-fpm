@@ -4,7 +4,7 @@ version: '3.8'
 # 当前配置仅保证可以启动容器；更多配置参数请参考镜像 README.md 文档中说明
 services:
   php-fpm:
-    image: 'colovu/php-fpm:7.4'
+    image: 'colovu/php-fpm:7.3'
     volumes:
       - 'app_conf:/srv/conf'
       - 'app_data:/srv/data'

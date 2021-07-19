@@ -5,7 +5,7 @@
 
 # 设置当前应用名称及版本
 ARG app_name=php
-ARG app_version=7.4.20
+ARG app_version=7.3.28
 
 # 设置默认仓库地址，默认为 阿里云 仓库
 ARG registry_url="registry.cn-shenzhen.aliyuncs.com"

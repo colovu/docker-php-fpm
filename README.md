@@ -9,12 +9,13 @@
 **版本信息：**
 
 - 7.4、latest
+- 7.3
 
 **镜像信息：**
 
 * 镜像地址：
-  - 阿里云: registry.cn-shenzhen.aliyuncs.com/colovu/php-fpm:7.4
-  - DockerHub：colovu/php-fpm:7.4
+  - 阿里云: registry.cn-shenzhen.aliyuncs.com/colovu/php-fpm:7.3
+  - DockerHub：colovu/php-fpm:7.3
   * 依赖镜像：debian:buster
 
 > 后续相关命令行默认使用`[Docker Hub](https://hub.docker.com)`镜像服务器做说明
@@ -41,10 +42,10 @@ Docker-Compose 快速启动命令：
 
 ```shell
 # 从 Gitee 下载 Compose 文件
-$ curl -sSL -o https://gitee.com/colovu/docker-php-fpm/raw/7.4/docker-compose.yml
+$ curl -sSL -o https://gitee.com/colovu/docker-php-fpm/raw/7.3/docker-compose.yml
 
 # 从 Github 下载 Compose 文件
-$ curl -sSL -o https://raw.githubusercontent.com/colovu/docker-php-fpm/7.4/docker-compose.yml
+$ curl -sSL -o https://raw.githubusercontent.com/colovu/docker-php-fpm/7.3/docker-compose.yml
 
 # 创建并启动容器
 $ docker-compose up -d
@@ -117,7 +118,9 @@ $ docker-compose up -d
 
 ## 更新记录
 
-- 7.4: 初始版本，基于 PHP 7.4.20 
+2021/7/19:
+- 7.4: 基于 PHP 7.4.20 
+- 7.3: 初始版本，基于 PHP 7.3.28 
 
 
 
